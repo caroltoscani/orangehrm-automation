@@ -3,9 +3,13 @@
 This repository contains an end-to-end test automation solution for the
 OrangeHRM demo application, developed as part of a technical assignment.
 
-The project demonstrates good automation practices such as Page Object Model,
-reusable components, cross-browser execution, and mobile testing using
-Playwright.
+The project demonstrates professional automation practices such as:
+- Page Object Model (POM)
+- Reusable components
+- Centralized assertions
+- Cross-browser execution
+- Mobile testing
+- CI execution using GitHub Actions
 
 ---
 
@@ -16,17 +20,18 @@ Playwright.
 - Node.js
 - Playwright Test Runner
 - Dotenv (environment variables)
+- GitHub Actions (CI)
 
 ---
 
 ## Application Under Test
 
 - URL: https://opensource-demo.orangehrmlive.com
-- Demo credentials are provided via environment variables.
+- Credentials are provided via environment variables.
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```text
 .
@@ -34,14 +39,20 @@ Playwright.
 │   ├── LoginComponent.ts
 │   └── LeftNavigation.ts
 ├── pages
+│   ├── LoginPage.ts
 │   └── MyInfoPage.ts
 ├── tests
 │   ├── login.spec.ts
 │   └── attachment.spec.ts
+├── utils
+│   └── assertion.ts
 ├── resources
 │   └── test-file.txt
 ├── config
 │   └── env.ts
+├── .github
+│   └── workflows
+│       └── playwright.yml
 ├── playwright.config.ts
 ├── run.sh
 └── README.md
@@ -52,57 +63,64 @@ Playwright.
 ## Reusable Components
 
 ### LoginComponent
-- Accepts username and password.
-- Performs login and validates successful authentication
-  (presence of the dashboard).
+- Encapsulates low-level login interactions.
+- Handles credential input and form submission.
+- Validates successful authentication via dashboard visibility.
 
 ### LeftNavigation
-- Provides navigation to any left menu item by name.
-- Handles both desktop and mobile layouts.
-- Uses direct route navigation for mobile viewports where UI layout
-  blocks pointer interactions.
+- Provides navigation to left menu items by name.
+- Adapts behavior for desktop and mobile layouts.
+- Uses direct routing on mobile to avoid UI overlay issues.
 
-### Assertion Handling
-- Assertions rely on Playwright’s built-in `expect` API.
+### Assertion Utility
+- Centralized assertion wrapper with automatic screenshot capture.
 - On failure:
-  - Screenshots are automatically captured.
-  - Traces are retained for debugging.
+  - A full-page screenshot is generated with a timestamp.
+  - The screenshot path is logged for debugging.
 
 ---
 
-## Test Scenario — Attachment Management
+## Test Scenarios
 
-The following scenario is automated:
+### Login Scenario
+1. Open the login page
+2. Enter valid credentials
+3. Submit the login form
+4. Validate that the dashboard is displayed
 
-1. Login to OrangeHRM.
-2. Navigate to **My Info** using the left navigation component.
-3. Validate that a default attachment (`test.png`) exists.
-4. Upload a new attachment with a comment.
-5. Save the attachment.
-6. Validate that:
-   - The total number of attachments is updated.
-   - Attachment fields contain valid values.
-7. Extract and store the file size of the newly uploaded attachment.
-8. Delete the uploaded attachment.
-9. Validate that only the original attachment remains.
+This is a critical smoke test and a prerequisite for all authenticated flows.
+
+---
+
+### Attachment Management – My Info
+
+1. Login to OrangeHRM
+2. Navigate to **My Info**
+3. Validate that the default attachment (`test.png`) exists
+4. Upload a new attachment with a comment
+5. Save the attachment
+6. Validate that the attachment list is updated
+7. Extract and store the file size of the uploaded attachment
+8. Delete the uploaded attachment
+9. Validate that only the original attachment remains
+
+This scenario validates a full CRUD flow involving file handling and UI state.
 
 ---
 
 ## Cross-Browser & Mobile Coverage
 
-The project supports execution on multiple environments:
-
 ### Desktop Browsers
 - Chromium
 - Firefox
 
-### Mobile Emulation (Playwright Devices)
+### Mobile Emulation
 - Samsung Galaxy S21
 - iPhone 14
 - iPhone 14 Pro Max
 
-Mobile execution uses Playwright’s built-in device emulation to validate
-responsive behavior without external dependencies.
+Mobile execution uses Playwright device emulation and includes
+navigation adaptations for responsive layouts.
 
 ---
 
@@ -117,64 +135,92 @@ ORANGEHRM_PASSWORD=XXXX
 
 ---
 
-## Running the Tests
+## Running the Tests (Local)
 
-All test executions are handled through a shell script to simplify usage and
-avoid exposing Playwright command details directly.
+All executions are handled through a shell script to simplify usage
+and abstract Playwright commands.
 
-### Install dependencies
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Run tests using the provided script
-
 Run all tests:
+
 ```bash
 ./run.sh all
 ```
 
 Run only desktop browsers:
+
 ```bash
 ./run.sh desktop
 ```
 
 Run only mobile devices:
+
 ```bash
 ./run.sh mobile
 ```
 
 Run a specific browser or device:
+
 ```bash
 ./run.sh chromium
 ./run.sh iphone-14-pro-max
 ```
 
 Run tests with UI (headed mode):
+
 ```bash
 ./run.sh chromium headed
 ```
 
+---
 
-The script abstracts Playwright commands and provides a consistent and
-automated execution interface, similar to what is commonly used in real-world
-projects.
+## Continuous Integration (GitHub Actions)
+
+This project includes a GitHub Actions pipeline that automatically runs
+the Playwright test suite on every push or pull request to the `main` branch.
+
+### CI Workflow Overview
+
+- Triggered on:
+  - `push` to `main`
+  - `pull_request` to `main`
+- Installs dependencies
+- Installs Playwright browsers
+- Executes the full test suite using `run.sh`
+
+### Required GitHub Secrets
+
+The following secrets must be configured in the repository settings:
+
+- `ORANGEHRM_USERNAME`
+- `ORANGEHRM_PASSWORD`
+
+### Workflow File Location
+
+```text
+.github/workflows/playwright.yml
+```
 
 ---
 
-##  Notes
+## Notes
 
-- Mobile navigation differs from desktop due to UI layout constraints in the
-  OrangeHRM demo application. The navigation component adapts accordingly.
-- The solution focuses on stability, readability, and maintainability,
-  following best practices expected in real-world test automation projects.
+- Mobile navigation differs from desktop due to UI layout constraints.
+- Direct route navigation is used on mobile to improve stability.
+- The project prioritizes readability, maintainability, and reliability.
 
 ---
 
 ## Author
 
 Automation assignment implemented by **Carolina Toscani**.
+
+---
 
 ## License
 
