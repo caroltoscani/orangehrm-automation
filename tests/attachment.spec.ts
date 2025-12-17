@@ -3,7 +3,6 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { MyInfoPage } from '../pages/MyInfoPage';
 import { LeftNavigation } from '../components/LeftNavigation';
-import { assertWithScreenshot } from '../utils/assertion';
 import { ENV } from '../config/env';
 
 test('Attachment Management - My Info', async ({ page }) => {
@@ -11,28 +10,48 @@ test('Attachment Management - My Info', async ({ page }) => {
   const leftNav = new LeftNavigation(page);
   const myInfoPage = new MyInfoPage(page);
 
-  // 👉 AQUI é onde você cria o filePath
   const filePath = path.resolve(
-    __dirname,
+    process.cwd(),
     'resources',
     'test-file.txt'
   );
 
-  // Login
   await loginPage.open();
   await loginPage.login(
     ENV.ORANGEHRM_USERNAME,
     ENV.ORANGEHRM_PASSWORD
   );
 
-  // Navigate
   await leftNav.navigateTo('My Info');
 
-  // Upload attachment
+  await myInfoPage.validateDefaultAttachmentExists();
+
   await myInfoPage.uploadAttachment(
     filePath,
-    'automation upload'
+    'automation upload file'
   );
 
-  // (continua o teste depois...)
+  await expect(
+    page.getByRole('cell', { name: 'test.png' })
+  ).toBeVisible();
+
+  await expect(
+    page.getByRole('cell', { name: 'test-file.txt' })
+  ).toBeVisible();
+
+  const uploadedFileSize =
+    await myInfoPage.getAttachmentFileSize('test-file.txt');
+
+  expect(uploadedFileSize).toBeTruthy();
+
+  await myInfoPage.deleteAttachmentByFileName('test-file.txt');
+  await expect(
+    page.getByRole('cell', { name: 'test-file.txt' })
+  ).not.toBeVisible();
+
+  await expect(
+    page.getByRole('cell', { name: 'test.png' })
+  ).toBeVisible();
+
+
 });
