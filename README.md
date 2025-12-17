@@ -119,28 +119,47 @@ ORANGEHRM_PASSWORD=XXXX
 
 ## Running the Tests
 
+All test executions are handled through a shell script to simplify usage and
+avoid exposing Playwright command details directly.
+
 ### Install dependencies
+
 ```bash
 npm install
 ```
 
-### Run all tests
+### Run tests using the provided script
+
+Run all tests:
 ```bash
-npx playwright test
+./run.sh all
 ```
 
-### Run a specific browser or device
+Run only desktop browsers:
 ```bash
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-npx playwright test --project=samsung-galaxy-s21
-npx playwright test --project=iphone-14-pro-max
+./run.sh desktop
 ```
 
-### Run tests with UI (headed mode)
+Run only mobile devices:
+```bash
+./run.sh mobile
+```
+
+Run a specific browser or device:
+```bash
+./run.sh chromium
+./run.sh iphone-14-pro-max
+```
+
+Run tests with UI (headed mode):
 ```bash
 ./run.sh chromium headed
 ```
+
+
+The script abstracts Playwright commands and provides a consistent and
+automated execution interface, similar to what is commonly used in real-world
+projects.
 
 ---
 
