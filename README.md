@@ -156,3 +156,7 @@ npx playwright test --project=iphone-14-pro-max
 ## Author
 
 Automation assignment implemented by **Carolina Toscani**.
+
+## License
+
+This project is licensed under the MIT License.
