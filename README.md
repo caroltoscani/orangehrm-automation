@@ -1,6 +1,3 @@
-# 📘 README.md 
-
-```md
 # OrangeHRM Automation Assignment
 
 This repository contains an end-to-end test automation solution for the
@@ -11,6 +8,7 @@ reusable components, cross-browser execution, and mobile testing using
 Playwright.
 
 ---
+
 ## Tech Stack
 
 - Playwright
@@ -20,12 +18,15 @@ Playwright.
 - Dotenv (environment variables)
 
 ---
+
 ## Application Under Test
 
 - URL: https://opensource-demo.orangehrmlive.com
 - Demo credentials are provided via environment variables.
+
 ---
-## Project Structure
+
+##  Project Structure
 
 ```text
 .
@@ -42,9 +43,9 @@ Playwright.
 ├── config
 │   └── env.ts
 ├── playwright.config.ts
-├── run-tests.sh
+├── run.sh
 └── README.md
-
+```
 
 ---
 
@@ -62,7 +63,7 @@ Playwright.
   blocks pointer interactions.
 
 ### Assertion Handling
-- Assertions rely on Playwright’s built-in expect API.
+- Assertions rely on Playwright’s built-in `expect` API.
 - On failure:
   - Screenshots are automatically captured.
   - Traces are retained for debugging.
@@ -86,6 +87,7 @@ The following scenario is automated:
 9. Validate that only the original attachment remains.
 
 ---
+
 ## Cross-Browser & Mobile Coverage
 
 The project supports execution on multiple environments:
@@ -109,28 +111,25 @@ responsive behavior without external dependencies.
 Create a `.env` file in the project root:
 
 ```env
-ORANGEHRM_USERNAME=Admin
-ORANGEHRM_PASSWORD=admin123
-````
+ORANGEHRM_USERNAME=XXXX
+ORANGEHRM_PASSWORD=XXXX
+```
 
 ---
 
 ## Running the Tests
 
 ### Install dependencies
-
 ```bash
 npm install
 ```
 
 ### Run all tests
-
 ```bash
 npx playwright test
 ```
 
 ### Run a specific browser or device
-
 ```bash
 npx playwright test --project=chromium
 npx playwright test --project=firefox
@@ -139,18 +138,17 @@ npx playwright test --project=iphone-14-pro-max
 ```
 
 ### Run tests with UI (headed mode)
-
 ```bash
 ./run.sh chromium headed
 ```
 
 ---
 
-## Notes
+##  Notes
 
-* Mobile navigation differs from desktop due to UI layout constraints in the
+- Mobile navigation differs from desktop due to UI layout constraints in the
   OrangeHRM demo application. The navigation component adapts accordingly.
-* The solution focuses on stability, readability, and maintainability,
+- The solution focuses on stability, readability, and maintainability,
   following best practices expected in real-world test automation projects.
 
 ---
@@ -158,4 +156,3 @@ npx playwright test --project=iphone-14-pro-max
 ## Author
 
 Automation assignment implemented by **Carolina Toscani**.
-
