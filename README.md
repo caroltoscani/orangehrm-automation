@@ -35,9 +35,14 @@ The project demonstrates professional automation practices such as:
 
 ```text
 .
+├── .github
+│   └── workflows
+│       └── playwright.yml
 ├── components
 │   ├── LoginComponent.ts
 │   └── LeftNavigation.ts
+├── config
+│   └── env.ts
 ├── pages
 │   ├── LoginPage.ts
 │   └── MyInfoPage.ts
@@ -48,11 +53,6 @@ The project demonstrates professional automation practices such as:
 │   └── assertion.ts
 ├── resources
 │   └── test-file.txt
-├── config
-│   └── env.ts
-├── .github
-│   └── workflows
-│       └── playwright.yml
 ├── playwright.config.ts
 ├── run.sh
 └── README.md
