@@ -11,7 +11,6 @@ reusable components, cross-browser execution, and mobile testing using
 Playwright.
 
 ---
-
 ## Tech Stack
 
 - Playwright
@@ -21,16 +20,12 @@ Playwright.
 - Dotenv (environment variables)
 
 ---
-
 ## Application Under Test
 
 - URL: https://opensource-demo.orangehrmlive.com
 - Demo credentials are provided via environment variables.
-
 ---
-
 ## Project Structure
-## 📂 Project Structure
 
 ```text
 .
