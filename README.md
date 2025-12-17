@@ -30,8 +30,9 @@ Playwright.
 ---
 
 ## Project Structure
+## 📂 Project Structure
 
-```
+```text
 .
 ├── components
 │   ├── LoginComponent.ts
@@ -48,7 +49,7 @@ Playwright.
 ├── playwright.config.ts
 ├── run-tests.sh
 └── README.md
-````
+
 
 ---
 
