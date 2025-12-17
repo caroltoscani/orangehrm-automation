@@ -32,7 +32,6 @@ Playwright.
 ## Project Structure
 
 ```
-
 .
 ├── components
 │   ├── LoginComponent.ts
