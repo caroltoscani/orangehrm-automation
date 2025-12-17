@@ -48,7 +48,6 @@ Playwright.
 ├── playwright.config.ts
 ├── run-tests.sh
 └── README.md
-
 ````
 
 ---
