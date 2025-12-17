@@ -130,20 +130,32 @@ npm install
 
 ### Run tests using the provided script
 
-Run tests for a specific browser or device:
+Run all tests:
+```bash
+./run.sh all
+```
 
+Run only desktop browsers:
+```bash
+./run.sh desktop
+```
+
+Run only mobile devices:
+```bash
+./run.sh mobile
+```
+
+Run a specific browser or device:
 ```bash
 ./run.sh chromium
-./run.sh firefox
-./run.sh samsung-galaxy-s21
 ./run.sh iphone-14-pro-max
 ```
 
-### Run tests with UI (headed mode)
-
+Run tests with UI (headed mode):
 ```bash
 ./run.sh chromium headed
 ```
+
 
 The script abstracts Playwright commands and provides a consistent and
 automated execution interface, similar to what is commonly used in real-world
